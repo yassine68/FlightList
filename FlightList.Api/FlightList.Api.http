@@ -1,0 +1,35 @@
+﻿@FlightList.Api_HostAddress = https://localhost:7172
+
+GET {{FlightList.Api_HostAddress}}/api/flight
+
+###
+
+PUT {{FlightList.Api_HostAddress}}/api/flight
+Content-Type: application/json
+
+{
+  "id": "b74235d9-06bf-4cae-938c-1ac8329d5872",
+  "name": "test 2",
+  "departureAirportId": "916e795f-97de-49d5-963b-f67179ca26fe",
+  "arrivalAirportId": "f687ad8e-94d8-4939-858a-7c2071dfaf81"
+}
+
+###
+GET {{FlightList.Api_HostAddress}}/api/flight/b74235d9-06bf-4cae-938c-1ac8329d5872
+
+###
+
+GET {{FlightList.Api_HostAddress}}/api/airport
+
+###
+
+POST {{FlightList.Api_HostAddress}}/api/flight
+Content-Type: application/json
+
+{
+  "name": "Test",
+  "departureAirportId": "7b0be66b-b6db-425e-9bee-96c5b7126301",
+  "arrivalAirportId": "ec604f42-8e8f-43a6-be23-f6cb91c15090"
+}
+
+###

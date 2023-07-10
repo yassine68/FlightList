@@ -1,0 +1,67 @@
+﻿@page "/flights"
+<PageTitle>Flights List</PageTitle>
+
+<h1>Welcome to ,the Flights Section</h1>
+
+<hr />
+<a href="@($"FlightDetails")" class="btn btn-success">Add New Flight</a>
+<hr />
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col" hidden>#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Departure Airport</th>
+            <th scope="col">Arrival Airport</th>
+            <th scope="col">Distance</th>
+            <td>Manage</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var flight in this._flightLists.OrderBy(o => o.DateAdd))
+        {
+            <tr>
+                <td hidden>@flight.Id</td>
+                <td>@flight.Name</td>
+                <td>
+                    <ul>
+                        <li>@flight.DepartureAirport!.Name</li>
+                        <li>@flight.DepartureAirport!.Code</li>
+                       <li>
+                            Coordinates : 
+                           <ul>
+                                <li>@flight.DepartureAirport!.Coordinates!.Longitude</li>
+                                <li>@flight.DepartureAirport!.Coordinates!.Latitude</li>
+                           </ul>
+                       </li>
+                    </ul>
+                </td>
+
+                <td>
+                    <ul>
+                        <li>@flight.ArrivalAirport!.Name</li>
+                        <li>@flight.ArrivalAirport!.Code</li>
+                       <li>
+                            Coordinates :
+                           <ul>
+                                <li>@flight.ArrivalAirport!.Coordinates!.Longitude</li>
+                                <li>@flight.ArrivalAirport!.Coordinates!.Latitude</li>
+                           </ul>
+                       </li>
+                    </ul>
+                </td>
+              
+                <td>@Math.Round(flight.Distance,2) km</td>
+
+                <td>
+                    <a href="@($"FlightDetails/{flight.Id}")" class="btn btn-warning">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+
+}

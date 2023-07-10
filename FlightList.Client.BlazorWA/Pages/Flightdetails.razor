@@ -1,0 +1,60 @@
+﻿@page "/flightdetails"
+@page "/flightdetails/{id}"
+
+@if (string.IsNullOrEmpty(Id))
+{
+    <PageTitle>Add New Flight</PageTitle>
+    <h1>Add New Flight</h1>
+}
+else
+{
+    <PageTitle>Manage Flight</PageTitle>
+    <h1>Manage Flight</h1>
+}
+
+<div class="row">
+    <EditForm Model="@model" OnValidSubmit="@HandleValidRequest" OnInvalidSubmit="@HandleFailedRequest">
+
+        <InputText class="col-md-8 from-control" hidden @bind-Value="@model.Id"></InputText>
+
+        <div class="form-group">
+            <label class="col-md-3">Name</label>
+            <InputText class="col-md-8 form-control" @bind-Value="@model.Name"></InputText>
+        </div>
+        <div class="form-group mt-3">
+            <label class="col-md-3">Departure Airport</label>
+            <div class="col-md-8">
+                <select class="form-control" @bind="@model.DepartureAirportId">
+                    @foreach (var airport in model.AirportListRessources!)
+                    {
+                        <option value="@airport.Id">@airport.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <label class="col-md-3">Arrival Airport</label>
+            <div class="col-md-8">
+                <select class="form-control" @bind="@model.ArrivalAirportId">
+                    @foreach (var airport in model.AirportListRessources!)
+                    {
+                        <option value="@airport.Id">@airport.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group mt-3">
+            <div class="col-md-offset-3 col-md-8">
+                <button type="submit" class="btn btn-warning">Save</button>
+                <a @onclick="@GoToFlights" class="btn btn-primary">Back</a> &nbsp;
+                @if (!string.IsNullOrEmpty(Id))
+                {
+                    <a @onclick="@DeleteFlight" class="btn btn-danger">Delete</a>
+                }
+            </div>
+        </div>
+
+        <br>
+        <p class="text text-warning">@Message</p>
+    </EditForm>
+</div>
